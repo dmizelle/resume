@@ -15,6 +15,22 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install Nix
         uses: cachix/install-nix-action@v15
+
+      - name: Cache Nix Store
+        uses: actions/cache@v2
+        with:
+          path: |
+            /nix/store/**
+            /nix/var/nix/*/*
+            /nix/var/nix/db/*
+            /nix/var/nix/db/*/**
+            !/nix/var/nix/daemon-socket/socket
+            !/nix/var/nix/userpool/*
+            !/nix/var/nix/gc.lock
+            !/nix/var/nix/db/big-lock
+            !/nix/var/nix/db/reserved
+          key: ${{ hashFiles('flake.lock') }}
+
       - name: Run Nix Build
         run: nix build --verbose
       - name: Upload PDF
