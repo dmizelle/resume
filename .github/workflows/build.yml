@@ -1,0 +1,25 @@
+---
+name: Build Resume
+
+on:
+  push:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Nix
+        uses: cachix/install-nix-action@v15
+      - name: Run Nix Build
+        run: nix build --verbose
+      - name: Upload PDF
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'main')
+        with:
+          files: |
+            result/resume.pdf

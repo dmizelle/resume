@@ -45,8 +45,7 @@
             substituteInPlace developercv.cls \
               --replace @NIXLOGOPATH@ ${nixLogo}
             xelatex --shell-escape resume.tex
-            ls -lah covers/*
-            xelatex covers/*
+            if [ -d covers ]; then xelatex covers/*; fi
           '';
           installPhase = ''
             mkdir $out
