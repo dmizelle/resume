@@ -14,20 +14,33 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+        latex = (pkgs.texlive.combine {
+          inherit (pkgs.texlive) scheme-small
+            svg
+            trimspaces
+            catchfile
+            transparent
+            moresize
+            hyphenat
+            raleway
+            fontawesome5
+            pagecolor
+          ;
+        });
         buildInputs = with pkgs; [
-          texlive.combined.scheme-full
+          latex
           font-awesome
           fontconfig
-          inkscape
         ];
         fonts = pkgs.makeFontsConf {
           fontDirectories = [
             pkgs.font-awesome
           ];
         };
+          # I would prefer to use a flake input here, but it takes quite a bit to clone this repo.
           nixLogo = pkgs.fetchurl {
-            url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/9ba74f81ffeec7e88bc95b3ddf3509e9a8a97587/logo/white.svg";
-            sha256 = "1k3ic1b1fmsar8fhms192vfyszx4xivdpak0f49zd2xh5pmabp8i";
+            url = "https://github.com/NixOS/nixos-artwork/raw/a86492b5338813910e4505b30a8600be2c2a1f4c/logo/white.png";
+            sha256 = "0pd45ya86x1z00fb67aqhmmvm7pk50awkmw3bigmhhiwd4lv9n6h";
           };
       in {
         devShell = pkgs.mkShell {
