@@ -33,9 +33,14 @@ jobs:
 
       - name: Run Nix Build
         run: nix build --verbose
+      - name: Create Tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "${{ github.event.repository.updated_at }}"
       - name: Upload PDF
         uses: softprops/action-gh-release@v1
         if: github.ref == 'refs/heads/main'
         with:
+          tag_name: "${{ github.event.repository.updated_at }}"
           files: |
             result/resume.pdf
