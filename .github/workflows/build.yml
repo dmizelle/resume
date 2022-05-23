@@ -35,7 +35,7 @@ jobs:
         run: nix build -L --verbose
       - name: Get current date for tag
         id: tag
-        run: echo "::set-output name=tag::$(sh date '+%s')"
+        run: echo "::set-output name=tag::$(date '+%s')"
       - name: Create Tag
         uses: rickstaa/action-create-tag@v1
         with:
