@@ -32,15 +32,18 @@ jobs:
           key: ${{ hashFiles('flake.lock') }}
 
       - name: Run Nix Build
-        run: nix build --verbose
+        run: nix build -L --verbose
+      - name: Get current date for tag
+        id: tag
+        run: echo "::set-output name=tag::$(sh date '+%s')"
       - name: Create Tag
         uses: rickstaa/action-create-tag@v1
         with:
-          tag: "${{ github.event.repository.updated_at }}"
+          tag: "${{ steps.tag.outputs.tag }}"
       - name: Upload PDF
         uses: softprops/action-gh-release@v1
         if: github.ref == 'refs/heads/main'
         with:
-          tag_name: "${{ github.event.repository.updated_at }}"
+          tag_name: "${{ steps.tag.outputs.tag }}"
           files: |
             result/resume.pdf
