@@ -46,7 +46,7 @@
 \fancypagestyle{firstpage}{%
   \fancyhf{}
   % INFO(dmizelle): you'll notice here that there is @NIXLOGOPATH@ which gets replaced by nix build
-  \fancyhead[R]{\color{white} \footnotesize \faHeart\space Written in \LaTeX, built with Nix \includesvg[height=0.9\baselineskip]{@NIXLOGOPATH@}}
+  \fancyhead[R]{\color{white} \footnotesize \faHeart\space Written in \LaTeX, built with Nix \includegraphics[height=0.9\baselineskip]{@NIXLOGOPATH@}}
 }
 
 \usepackage{moresize} % Provides more font size commands (\HUGE and \ssmall)

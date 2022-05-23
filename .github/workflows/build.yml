@@ -35,7 +35,7 @@ jobs:
         run: nix build --verbose
       - name: Upload PDF
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'main')
+        if: github.ref == 'refs/heads/main'
         with:
           files: |
             result/resume.pdf
