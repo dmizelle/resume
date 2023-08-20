@@ -16,6 +16,9 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v15
 
+      - name: Cache Nix Store
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
       - name: Run Nix Build
         run: nix build -L --verbose
 

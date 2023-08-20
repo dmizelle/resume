@@ -19,7 +19,7 @@
         latex = (pkgs.texlive.combine {
           inherit (pkgs.texlive)
             scheme-small svg trimspaces catchfile transparent moresize hyphenat
-            raleway fontawesome5 pagecolor;
+            raleway fontawesome5 pagecolor hardwrap;
         });
 
         buildInputs = with pkgs; [ latex font-awesome fontconfig ];
